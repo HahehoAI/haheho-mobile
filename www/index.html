@@ -1,0 +1,42 @@
+<!doctype html>
+<!--
+  Local fallback page.
+  With server.url set in capacitor.config.ts, the WebView loads the remote
+  Django UI directly and this file is normally never shown. It exists because
+  Capacitor requires a webDir with an index.html for `cap sync`.
+  A polished offline/error experience is scoped in Step 8 (store readiness).
+-->
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Haheho AI</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", Roboto, sans-serif;
+      background: #ffffff;
+      color: #1c2b3a;
+    }
+    .wrap {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-align: center;
+      padding: 24px;
+    }
+    .name { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+    .msg  { font-size: 15px; color: #5a6b7c; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="name">Haheho AI</div>
+    <div class="msg">연결 중입니다&hellip;<br>Connecting&hellip;</div>
+  </div>
+</body>
+</html>
