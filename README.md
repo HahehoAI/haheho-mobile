@@ -180,6 +180,26 @@ Icon source for the inpatient app: `assets/inpatient/icon.png`. Splash screens: 
 `android/app/src/inpatient/res/drawable*/splash.png`, iOS `ios/App/Inpatient/Splash.xcassets`
 (Haheho AI's iOS splash is in `ios/App/App/Splash.xcassets`).
 
+## Release signing (Google Play)
+
+Release builds are signed with the **upload key** `haheho-upload` (one key for all Haheho apps;
+Google holds the real app-signing key via Play App Signing). Gradle reads it from
+`android/keystore.properties`, which is **not in git**:
+
+```
+storeFile=/absolute/path/to/haheho-upload.jks
+storePassword=…
+keyAlias=haheho-upload
+keyPassword=…
+```
+
+The `.jks` file and its password are kept in the team's safe place — ask before creating a new one.
+Without `keystore.properties`, release builds are produced unsigned.
+
+Every upload to Google Play needs a higher `versionCode` (`android/app/build.gradle`), and usually a
+new `versionName`. Store bundle: `npm run release:android:inpatient` →
+`android/app/build/outputs/bundle/inpatientRelease/app-inpatient-release.aab`.
+
 ## Changing the domain later
 
 1. Edit `server.url` in `capacitor.config.ts`
