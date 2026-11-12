@@ -1,0 +1,174 @@
+<!doctype html>
+<!--
+  Offline / can't-reach-server page, shared by both apps.
+  Capacitor shows this (server.errorPath in capacitor.config.ts) instead of the
+  WebView's error page when the site fails to load. "Try again" goes back to the
+  server URL written into this file on every `npx cap sync`.
+-->
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Offline</title>
+  <script>window.HAHEHO_SERVER_URL = "https://dev.haheho.ai"; /* set by scripts/set-offline-server-url.mjs */</script>
+  <style>
+    :root {
+      --brand: #FF8922;
+      --brand-soft: #FFF3E8;
+      --text: #1C2B3A;
+      --muted: #5F6B78;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #FFFFFF;
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", Roboto, sans-serif;
+      -webkit-text-size-adjust: 100%;
+    }
+    .wrap {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 28px calc(32px + env(safe-area-inset-bottom));
+      text-align: center;
+    }
+    .icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: var(--brand-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+    .icon svg { width: 48px; height: 48px; }
+    h1 {
+      font-size: 22px;
+      line-height: 1.35;
+      font-weight: 700;
+      margin: 0 0 10px;
+      word-break: keep-all;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--muted);
+      margin: 0 0 32px;
+      max-width: 320px;
+      word-break: keep-all;
+    }
+    button {
+      appearance: none;
+      border: 0;
+      border-radius: 14px;
+      background: var(--brand);
+      color: #FFFFFF;
+      font: inherit;
+      font-size: 17px;
+      font-weight: 600;
+      width: 100%;
+      max-width: 320px;
+      min-height: 54px;
+      padding: 0 24px;
+      cursor: pointer;
+    }
+    button:active { opacity: 0.85; }
+    button[disabled] { opacity: 0.6; }
+    .note {
+      min-height: 22px;
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#FF8922" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 2l20 20"/>
+        <path d="M8.5 16.5a5 5 0 0 1 7 0"/>
+        <path d="M5 12.86a10 10 0 0 1 5.17-2.69"/>
+        <path d="M19 12.86a10 10 0 0 0-2.01-1.52"/>
+        <path d="M2 8.82a15 15 0 0 1 4.17-2.65"/>
+        <path d="M10.66 5a15 15 0 0 1 11.34 3.82"/>
+        <path d="M12 20h.01"/>
+      </svg>
+    </div>
+    <h1 id="title"></h1>
+    <p id="body"></p>
+    <button id="retry" type="button"></button>
+    <div class="note" id="note" role="status" aria-live="polite"></div>
+  </main>
+
+  <script>
+    (function () {
+      var ko = /^ko\b/i.test(navigator.language || '');
+      var t = ko ? {
+        lang: 'ko',
+        title: '인터넷에 연결되어 있지 않아요',
+        body: 'Wi‑Fi 또는 모바일 데이터 연결을 확인한 후 다시 시도해 주세요.',
+        retry: '다시 시도',
+        connecting: '연결 중…',
+        stillOffline: '아직 연결되지 않았어요. 잠시 후 다시 시도해 주세요.'
+      } : {
+        lang: 'en',
+        title: "You're offline",
+        body: 'Check your Wi‑Fi or mobile data connection, then try again.',
+        retry: 'Try again',
+        connecting: 'Connecting…',
+        stillOffline: "Still not connected. Please try again in a moment."
+      };
+
+      document.documentElement.lang = t.lang;
+      document.title = t.title;
+      document.getElementById('title').textContent = t.title;
+      document.getElementById('body').textContent = t.body;
+      var btn = document.getElementById('retry');
+      var note = document.getElementById('note');
+      btn.textContent = t.retry;
+
+      function retry() {
+        if (navigator.onLine === false) {
+          note.textContent = t.stillOffline;
+          return;
+        }
+        btn.disabled = true;
+        btn.textContent = t.connecting;
+        note.textContent = '';
+        var url = window.HAHEHO_SERVER_URL;
+        if (url) {
+          window.location.replace(url);
+        } else {
+          window.history.back();
+        }
+      }
+
+      btn.addEventListener('click', retry);
+
+      // Come back by itself once the server is reachable again. The 'online'
+      // event isn't reliable inside the app's WebView, so quietly check the
+      // server every few seconds while this page is on screen.
+      var checking = false;
+      function probe() {
+        var url = window.HAHEHO_SERVER_URL;
+        if (!url || checking || document.hidden || btn.disabled) return;
+        checking = true;
+        fetch(url.replace(/\/$/, '') + '/favicon.ico?offline-check=' + Date.now(),
+              { mode: 'no-cors', cache: 'no-store' })
+          .then(function () { retry(); })
+          .catch(function () { /* still offline */ })
+          .then(function () { checking = false; });
+      }
+      setInterval(probe, 5000);
+      window.addEventListener('online', probe);
+      document.addEventListener('visibilitychange', probe);
+    })();
+  </script>
+</body>
+</html>

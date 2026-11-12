@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A1E5B612FF0A00100C0FFEE /* Splash.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A1E5B602FF0A00100C0FFEE /* Splash.xcassets */; };
+		9A1E5B632FF0A00100C0FFEE /* Splash.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A1E5B622FF0A00100C0FFEE /* Splash.xcassets */; };
 		9A1E5B292FF0A00100C0FFEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
 		9A1E5B302FF0A00100C0FFEE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582B6822FE993A50072D4E8 /* SceneDelegate.swift */; };
 		9A1E5B312FF0A00100C0FFEE /* HahehoBridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1E5B012FF0A00100C0FFEE /* HahehoBridgeViewController.swift */; };
@@ -31,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A1E5B602FF0A00100C0FFEE /* Splash.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Splash.xcassets; sourceTree = "<group>"; };
+		9A1E5B622FF0A00100C0FFEE /* Splash.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Splash.xcassets; sourceTree = "<group>"; };
 		9A1E5B172FF0A00100C0FFEE /* Inpatient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inpatient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A1E5B272FF0A00100C0FFEE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9A1E5B282FF0A00100C0FFEE /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -72,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				9A1E5B262FF0A00100C0FFEE /* InfoPlist.strings */,
+				9A1E5B622FF0A00100C0FFEE /* Splash.xcassets */,
 			);
 			path = Inpatient;
 			sourceTree = "<group>";
@@ -104,6 +109,7 @@
 				9A1E5B012FF0A00100C0FFEE /* HahehoBridgeViewController.swift */,
 				504EC30B1FED79650016851F /* Main.storyboard */,
 				504EC30E1FED79650016851F /* Assets.xcassets */,
+				9A1E5B602FF0A00100C0FFEE /* Splash.xcassets */,
 				504EC3101FED79650016851F /* LaunchScreen.storyboard */,
 				504EC3131FED79650016851F /* Info.plist */,
 				2FAD9762203C412B000D30F8 /* config.xml */,
@@ -203,6 +209,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A1E5B632FF0A00100C0FFEE /* Splash.xcassets in Resources */,
 				9A1E5B332FF0A00100C0FFEE /* LaunchScreen.storyboard in Resources */,
 				9A1E5B342FF0A00100C0FFEE /* public in Resources */,
 				9A1E5B352FF0A00100C0FFEE /* Assets.xcassets in Resources */,
@@ -220,6 +227,7 @@
 				504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */,
 				50B271D11FEDC1A000F3C39B /* public in Resources */,
 				504EC30F1FED79650016851F /* Assets.xcassets in Resources */,
+				9A1E5B612FF0A00100C0FFEE /* Splash.xcassets in Resources */,
 				50379B232058CBB4000EE86E /* capacitor.config.json in Resources */,
 				504EC30D1FED79650016851F /* Main.storyboard in Resources */,
 				2FAD9763203C412B000D30F8 /* config.xml in Resources */,
@@ -299,7 +307,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -324,7 +332,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};

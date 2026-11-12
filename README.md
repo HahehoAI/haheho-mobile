@@ -142,7 +142,9 @@ Run on a device or emulator from Android Studio.
 
 Both load the same site and share everything native: permissions, plugins, `MainActivity` /
 `HahehoBridgeViewController`, and `capacitor.config.ts` (server URL, base user agent, splash).
-A fix in any of those applies to both apps. Only these differ per app:
+The offline page (`www/offline.html`, shown when the site can't load) is shared too; its "Try again"
+target is filled in from `server.url` on every `npx cap sync` (`scripts/set-offline-server-url.mjs`).
+A fix in any of those applies to both apps. Only these differ per app (incl. launch/splash screen):
 
 - **Android** — product flavors `haheho` / `inpatient` in `android/app/build.gradle` (app ID +
   `USER_AGENT_TAG`). Names/icons: `src/main/res` is the Haheho AI default; the inpatient app
@@ -174,7 +176,9 @@ In Xcode, pick the **App** or **Inpatient** scheme at the top, then a simulator/
 For the store: select the scheme → **Product → Archive** (needs the Apple developer team set under
 Signing & Capabilities for that target).
 
-Icon source for the inpatient app: `assets/inpatient/icon.png`.
+Icon source for the inpatient app: `assets/inpatient/icon.png`. Splash screens: Android
+`android/app/src/inpatient/res/drawable*/splash.png`, iOS `ios/App/Inpatient/Splash.xcassets`
+(Haheho AI's iOS splash is in `ios/App/App/Splash.xcassets`).
 
 ## Changing the domain later
 

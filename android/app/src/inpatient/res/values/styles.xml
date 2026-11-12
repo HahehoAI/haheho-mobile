@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Inpatient app: orange launch screen. Overrides only this style from src/main. -->
+<resources>
+    <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
+        <!-- Android 11 and older: full-screen image -->
+        <item name="android:background">@drawable/splash</item>
+        <!-- Android 12+: system splash = app icon on this color -->
+        <item name="windowSplashScreenBackground">@color/ic_launcher_background</item>
+    </style>
+</resources>

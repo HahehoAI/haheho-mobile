@@ -11,7 +11,9 @@ const config: CapacitorConfig = {
   // stage (https://stage2.haheho.ai), then `npx cap sync` and rebuild.
   server: {
     url: 'https://dev.haheho.ai',
-    cleartext: false
+    cleartext: false,
+    // Shown (from www/) when the site can't be loaded, e.g. no internet.
+    errorPath: 'offline.html'
   },
 
   // Appended to the WebView user agent so Django / logs / analytics can
