@@ -202,7 +202,7 @@ new `versionName`. Store bundle: `npm run release:android:inpatient` →
 
 ## Changing the domain later
 
-1. Edit `server.url` in `capacitor.config.ts`
+1. Edit `server.url` in `capacitor.config.ts` (the app opens on `server.appStartPath`, `/auth/login/`)
 2. `npx cap sync`
 3. Rebuild both platforms
 
