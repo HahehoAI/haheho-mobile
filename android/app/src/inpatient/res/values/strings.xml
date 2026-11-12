@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- Inpatient app overrides of src/main/res/values/strings.xml. -->
+<resources>
+    <string name="app_name">Inpatient AI Agent</string>
+    <string name="title_activity_main">Inpatient AI Agent</string>
+    <string name="package_name">ai.haheho.inpatient</string>
+    <string name="custom_url_scheme">ai.haheho.inpatient</string>
+</resources>

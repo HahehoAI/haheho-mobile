@@ -1,0 +1,4 @@
+/* Inpatient AI Agent app only — overrides App/Info.plist for this target. */
+"CFBundleDisplayName" = "Inpatient AI Agent";
+"NSCameraUsageDescription" = "Inpatient AI Agent uses the camera to scan codes.";
+"NSMicrophoneUsageDescription" = "Inpatient AI Agent uses the microphone for voice conversations and dictation.";

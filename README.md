@@ -1,8 +1,10 @@
 # haheho-mobile
 
-Capacitor native shell for the **Haheho AI** patient/caregiver app. The app is a native iOS/Android
-binary whose WebView loads the Django-served UI at **https://stage2.haheho.ai** (temporary domain —
+Capacitor native shell for the Haheho patient/caregiver apps. Each app is a native iOS/Android
+binary whose WebView loads the Django-served UI (currently **https://dev.haheho.ai** for test builds —
 see "Changing the domain" below).
+
+This repo builds **two store apps from the same code** — see "Two apps" below.
 
 - **Bundle ID / package name:** `ai.haheho.app` (permanent after first store upload)
 - **Display name:** Haheho AI
@@ -114,7 +116,7 @@ Run on a device or emulator from Android Studio.
 
 ## Step 2 verification checklist (the milestone)
 
-- [ ] App launches, splash shows, and lands on the `stage2.haheho.ai` login page
+- [ ] App launches, splash shows, and lands on the site's login page
 - [ ] Email/password login succeeds; post-login navigation works normally
 - [ ] **Session persists**: force-quit the app, relaunch → still logged in (cookie retained)
 - [ ] **Voice agent turn**: mic permission prompt appears once; a full STT → LLM → TTS turn
@@ -129,6 +131,50 @@ Run on a device or emulator from Android Studio.
   by native sign-in in Step 6 (JIRA) — not a bug in the shell.
 - **Offline shows a WebView error page.** Polished offline handling is Step 8 (store readiness).
 - **No push notifications.** Step 4.
+
+## Two apps
+
+| | Haheho AI | Inpatient AI Agent / 병동 AI 에이전트 |
+|---|---|---|
+| For | All programs | Hospital inpatients only |
+| App ID | `ai.haheho.app` | `ai.haheho.inpatient` (**confirm before first upload — permanent after**) |
+| User agent | `… HahehoApp/0.1` | `… HahehoApp/0.1 HahehoInpatient` |
+
+Both load the same site and share everything native: permissions, plugins, `MainActivity` /
+`HahehoBridgeViewController`, and `capacitor.config.ts` (server URL, base user agent, splash).
+A fix in any of those applies to both apps. Only these differ per app:
+
+- **Android** — product flavors `haheho` / `inpatient` in `android/app/build.gradle` (app ID +
+  `USER_AGENT_TAG`). Names/icons: `src/main/res` is the Haheho AI default; the inpatient app
+  overrides them in `android/app/src/inpatient/res` (`values/` English, `values-ko/` Korean).
+- **iOS** — one Xcode target per app: `App` (Haheho AI) and `Inpatient`. Both compile the same
+  Swift files, storyboard, Info.plist and web assets. Per target: `PRODUCT_BUNDLE_IDENTIFIER`,
+  `HAHEHO_DISPLAY_NAME`, `HAHEHO_USER_AGENT_TAG`, app icon (`AppIcon` / `AppIcon-Inpatient` in
+  `Assets.xcassets`). Inpatient's Korean name and permission texts: `ios/App/Inpatient/*.lproj/InfoPlist.strings`.
+
+### Build commands — Android
+
+```bash
+npm run android:haheho          # build + install Haheho AI on the running emulator/phone
+npm run android:inpatient       # build + install Inpatient AI Agent (installs alongside)
+npm run release:android:haheho     # store bundle → android/app/build/outputs/bundle/hahehoRelease/
+npm run release:android:inpatient  # store bundle → android/app/build/outputs/bundle/inpatientRelease/
+```
+
+In Android Studio: **View → Tool Windows → Build Variants** → pick `hahehoDebug` or
+`inpatientDebug`, then ▶ Run. Release bundles need a signing key before the Play Console accepts them.
+
+### Build commands — iOS
+
+```bash
+npx cap sync ios && npx cap open ios
+```
+
+In Xcode, pick the **App** or **Inpatient** scheme at the top, then a simulator/iPhone → ▶ Run.
+For the store: select the scheme → **Product → Archive** (needs the Apple developer team set under
+Signing & Capabilities for that target).
+
+Icon source for the inpatient app: `assets/inpatient/icon.png`.
 
 ## Changing the domain later
 
