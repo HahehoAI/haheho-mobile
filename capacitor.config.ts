@@ -31,6 +31,10 @@ const config: CapacitorConfig = {
   },
 
   plugins: {
+    // Push (both apps). Show notifications even while the app is open.
+    FirebaseMessaging: {
+      presentationOptions: ['badge', 'sound', 'alert']
+    },
     SplashScreen: {
       launchShowDuration: 1500,
       launchAutoHide: true,

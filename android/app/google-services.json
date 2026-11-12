@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "243908980848",
+    "project_id": "haheho-mobile-temp",
+    "storage_bucket": "haheho-mobile-temp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243908980848:android:a66992178977f922e804b5",
+        "android_client_info": {
+          "package_name": "ai.haheho.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7t73AGw_s615SEwvcA64thXUfEIB86rA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

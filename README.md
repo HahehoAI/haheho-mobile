@@ -180,6 +180,28 @@ Icon source for the inpatient app: `assets/inpatient/icon.png`. Splash screens: 
 `android/app/src/inpatient/res/drawable*/splash.png`, iOS `ios/App/Inpatient/Splash.xcassets`
 (Haheho AI's iOS splash is in `ios/App/App/Splash.xcassets`).
 
+## Push notifications
+
+Plugin: `@capacitor-firebase/messaging` (what the backend's `haheho-native.js` expects — not the stock
+`@capacitor/push-notifications`). Firebase project: **haheho-mobile-temp**, the one the server's FCM key
+(`FCM_SECRET_NAME`) belongs to — every app must be registered in that same project.
+
+| | Haheho AI (`ai.haheho.app`) | Inpatient (`ai.haheho.inpatient`) |
+|---|---|---|
+| Android `android/app/google-services.json` | ✅ | ❌ not registered yet |
+| iOS `GoogleService-Info.plist` | ❌ | ❌ |
+
+- **Android:** one `google-services.json` lists all registered apps. After registering a new app in
+  Firebase, re-download it and replace the file. An app missing from it still builds, with push off
+  (Gradle prints "push disabled in …").
+- **iOS:** one `GoogleService-Info.plist` per app — `ios/App/App/` (Haheho AI) and `ios/App/Inpatient/`
+  (inpatient), each added to its own target's resources. Without it the app runs normally and logs
+  "Firebase was not configured". Push also needs the APNs key uploaded in Firebase (Project settings →
+  Cloud Messaging) and a signing team set in Xcode (entitlements: `App/App.entitlements`,
+  `Inpatient/Inpatient.entitlements`).
+- Status-bar icon/colour (Android): `res/drawable*/ic_notification`, `res/values/notification.xml`
+  (inpatient overrides in `src/inpatient/res`).
+
 ## Changing the domain later
 
 1. Edit `server.url` in `capacitor.config.ts`

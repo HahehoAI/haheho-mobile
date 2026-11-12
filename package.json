@@ -15,6 +15,7 @@
     "capacitor:copy:before": "node scripts/set-offline-server-url.mjs"
   },
   "dependencies": {
+    "@capacitor-firebase/messaging": "^8.6.0",
     "@capacitor/android": "^8.0.0",
     "@capacitor/core": "^8.0.0",
     "@capacitor/ios": "^8.0.0",

@@ -72,6 +72,20 @@ try {
     def servicesJSON = file('google-services.json')
     if (servicesJSON.text) {
         apply plugin: 'com.google.gms.google-services'
+
+        // Push (Firebase project haheho-mobile-temp — the one the server's FCM key is from).
+        // google-services.json lists every app ID registered in that project. Until an app
+        // (flavor) is registered there, skip its google-services step so it still builds;
+        // push just isn't available in that app yet.
+        def registered = new groovy.json.JsonSlurper().parse(servicesJSON).client
+            .collect { it.client_info.android_client_info.package_name }
+        android.applicationVariants.all { variant ->
+            if (!registered.contains(variant.applicationId)) {
+                logger.warn("google-services.json has no app ${variant.applicationId}: push disabled in ${variant.name}")
+                tasks.matching { it.name == "process${variant.name.capitalize()}GoogleServices" }
+                    .configureEach { enabled = false }
+            }
+        }
     }
 } catch(Exception e) {
     logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
