@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Inpatient app: orange launch screen. Overrides only this style from src/main. -->
+<!-- Inpatient app launch screen: white with the app icon (any hospital colour follows cleanly).
+     Overrides only this style from src/main. -->
 <resources>
     <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
-        <!-- Android 11 and older: full-screen image -->
+        <!-- Android 11 and older: full-screen image (white + icon) -->
         <item name="android:background">@drawable/splash</item>
-        <!-- Android 12+: system splash = app icon on this color -->
-        <item name="windowSplashScreenBackground">@color/ic_launcher_background</item>
+        <!-- Android 12+: system splash = app icon on this colour -->
+        <item name="windowSplashScreenBackground">@android:color/white</item>
     </style>
 </resources>
