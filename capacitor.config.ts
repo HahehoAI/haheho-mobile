@@ -5,17 +5,24 @@ const config: CapacitorConfig = {
   appName: 'Haheho AI',
   webDir: 'www',                 // local fallback only; runtime UI is served by Django
 
-  // The shell loads the Django-served UI directly.
-  // TEMPORARY DOMAIN — switch to the production domain before store release,
-  // then run `npx cap sync` and rebuild both platforms.
+  // The shell loads the Django-served UI directly. Shared by BOTH apps
+  // (Haheho AI + Inpatient AI Agent).
+  // Test builds → dev. Before store-submission builds, switch this ONE line to
+  // stage (https://stage2.haheho.ai), then `npx cap sync` and rebuild.
   server: {
-    url: 'https://stage2.haheho.ai',
+    url: 'https://dev.haheho.ai',
     cleartext: false
   },
 
   // Appended to the WebView user agent so Django / logs / analytics can
-  // identify requests coming from the native app.
+  // identify requests coming from the native app (server matches "HahehoApp/").
+  // The inpatient app adds " HahehoInpatient" after this, natively
+  // (Android: USER_AGENT_TAG in app/build.gradle).
   appendUserAgent: 'HahehoApp/0.1',
+
+  android: {
+    flavor: 'haheho'             // default for `npx cap run android`; use --flavor inpatient for the other app
+  },
 
   ios: {
     contentInset: 'automatic'

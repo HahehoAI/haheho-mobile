@@ -4,7 +4,6 @@ android {
     namespace = "ai.haheho.app"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "ai.haheho.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -16,6 +15,31 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+
+    // Two store apps from one codebase. Everything native (permissions,
+    // plugins, MainActivity, web config) lives in src/main and is shared;
+    // a flavor only sets what must differ per store listing: app ID,
+    // name/icons (src/<flavor>/res) and the extra user-agent tag.
+    // Build commands: see README "Two apps".
+    buildFeatures {
+        buildConfig = true
+    }
+    flavorDimensions = ["app"]
+    productFlavors {
+        haheho {
+            // Main app for all programs.
+            dimension "app"
+            applicationId "ai.haheho.app"           // PERMANENT after first store upload — do not change
+            buildConfigField "String", "USER_AGENT_TAG", '""'
+        }
+        inpatient {
+            // Hospital inpatients only, separate store listing.
+            dimension "app"
+            applicationId "ai.haheho.inpatient"     // PERMANENT once uploaded — confirm before first upload
+            buildConfigField "String", "USER_AGENT_TAG", '"HahehoInpatient"'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false

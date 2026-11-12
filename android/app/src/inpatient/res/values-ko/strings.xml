@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- Shown on phones set to Korean. -->
+<resources>
+    <string name="app_name">병동 AI 에이전트</string>
+    <string name="title_activity_main">병동 AI 에이전트</string>
+</resources>
