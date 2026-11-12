@@ -35,7 +35,7 @@ android {
         inpatient {
             // Hospital inpatients only, separate store listing.
             dimension "app"
-            applicationId "ai.haheho.inpatient"     // PERMANENT once uploaded — confirm before first upload
+            applicationId "haheho.ai"               // = Play Console app "병동 AI 에이전트" (package locked at creation). iOS bundle ID stays ai.haheho.inpatient
             buildConfigField "String", "USER_AGENT_TAG", '"HahehoInpatient"'
         }
     }

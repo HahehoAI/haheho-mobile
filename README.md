@@ -137,7 +137,7 @@ Run on a device or emulator from Android Studio.
 | | Haheho AI | Inpatient AI Agent / 병동 AI 에이전트 |
 |---|---|---|
 | For | All programs | Hospital inpatients only |
-| App ID | `ai.haheho.app` | `ai.haheho.inpatient` (**confirm before first upload — permanent after**) |
+| App ID | `ai.haheho.app` | Android `haheho.ai` (locked in Play Console) · iOS `ai.haheho.inpatient` |
 | User agent | `… HahehoApp/0.1` | `… HahehoApp/0.1 HahehoInpatient` |
 
 Both load the same site and share everything native: permissions, plugins, `MainActivity` /
