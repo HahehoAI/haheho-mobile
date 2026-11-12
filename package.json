@@ -11,7 +11,8 @@
     "android:haheho": "cap sync android && cd android && ./gradlew installHahehoDebug",
     "android:inpatient": "cap sync android && cd android && ./gradlew installInpatientDebug",
     "release:android:haheho": "cap sync android && cd android && ./gradlew bundleHahehoRelease",
-    "release:android:inpatient": "cap sync android && cd android && ./gradlew bundleInpatientRelease"
+    "release:android:inpatient": "cap sync android && cd android && ./gradlew bundleInpatientRelease",
+    "capacitor:copy:before": "node scripts/set-offline-server-url.mjs"
   },
   "dependencies": {
     "@capacitor/android": "^8.0.0",
