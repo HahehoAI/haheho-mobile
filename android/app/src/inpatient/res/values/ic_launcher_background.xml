@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Inpatient app: matches the orange of assets/inpatient/icon-512.png -->
+<!-- Inpatient app: matches the orange of assets/inpatient/icon.png -->
 <resources>
     <color name="ic_launcher_background">#F65803</color>
 </resources>

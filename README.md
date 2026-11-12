@@ -174,7 +174,7 @@ In Xcode, pick the **App** or **Inpatient** scheme at the top, then a simulator/
 For the store: select the scheme → **Product → Archive** (needs the Apple developer team set under
 Signing & Capabilities for that target).
 
-Icon source for the inpatient app: `assets/inpatient/icon-512.png`.
+Icon source for the inpatient app: `assets/inpatient/icon.png`.
 
 ## Changing the domain later
 
