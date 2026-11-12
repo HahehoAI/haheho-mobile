@@ -34,6 +34,7 @@ const config: CapacitorConfig = {
     SplashScreen: {
       launchShowDuration: 1500,
       launchAutoHide: true,
+      launchFadeOutDuration: 500,   // soft fade into the site instead of a hard cut
       backgroundColor: '#ffffff',
       showSpinner: false
     }
