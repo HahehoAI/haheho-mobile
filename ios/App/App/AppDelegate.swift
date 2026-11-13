@@ -1,4 +1,5 @@
 import UIKit
+import AVFoundation
 import Capacitor
 
 @UIApplicationMain
@@ -7,7 +8,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        // Play the agent's voice even when the iPhone's silent switch is on.
+        // The site plays it through Web Audio, which the default audio session
+        // mutes in silent mode (YouTube still played because media elements
+        // use a different path). Voice/podcast apps use .playback for this.
+        // WebKit switches the session itself while the microphone is in use;
+        // if the voice goes quiet after recording, the site can also set
+        // navigator.audioSession.type (iOS 17+).
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback)
+        } catch {
+            NSLog("Could not set audio session category: \(error)")
+        }
         return true
     }
 
