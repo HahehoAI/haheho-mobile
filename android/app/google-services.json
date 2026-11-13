@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "243908980848",
-    "project_id": "haheho-mobile-temp",
-    "storage_bucket": "haheho-mobile-temp.firebasestorage.app"
+    "project_number": "1063284122984",
+    "project_id": "inpatient-agent",
+    "storage_bucket": "inpatient-agent.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:243908980848:android:a66992178977f922e804b5",
+        "mobilesdk_app_id": "1:1063284122984:android:17e072d0bc5481171222dd",
         "android_client_info": {
-          "package_name": "ai.haheho.app"
+          "package_name": "haheho.ai"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC7t73AGw_s615SEwvcA64thXUfEIB86rA"
+          "current_key": "AIzaSyDU6xsemCMTw4LJBMZ0jc3xnykTcSaebHI"
         }
       ],
       "services": {

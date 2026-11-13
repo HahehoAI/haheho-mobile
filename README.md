@@ -137,7 +137,7 @@ Run on a device or emulator from Android Studio.
 | | Haheho AI | Inpatient AI Agent / 병동 AI 에이전트 |
 |---|---|---|
 | For | All programs | Hospital inpatients only |
-| App ID | `ai.haheho.app` | `ai.haheho.inpatient` (**confirm before first upload — permanent after**) |
+| App ID | `ai.haheho.app` | Android `haheho.ai` (locked in Play Console) · iOS `ai.haheho.inpatient` |
 | User agent | `… HahehoApp/0.1` | `… HahehoApp/0.1 HahehoInpatient` |
 
 Both load the same site and share everything native: permissions, plugins, `MainActivity` /
@@ -183,13 +183,14 @@ Icon source for the inpatient app: `assets/inpatient/icon.png`. Splash screens: 
 ## Push notifications
 
 Plugin: `@capacitor-firebase/messaging` (what the backend's `haheho-native.js` expects — not the stock
-`@capacitor/push-notifications`). Firebase project: **haheho-mobile-temp**, the one the server's FCM key
-(`FCM_SECRET_NAME`) belongs to — every app must be registered in that same project.
+`@capacitor/push-notifications`). Firebase project: **inpatient-agent** (company Google account). The server's FCM key
+(`FCM_SECRET_NAME` in AWS Secrets Manager) must be a service-account key from this same project, and
+every app the server pushes to must be registered in it — add Haheho AI here too when it ships.
 
-| | Haheho AI (`ai.haheho.app`) | Inpatient (`ai.haheho.inpatient`) |
+| | Haheho AI (`ai.haheho.app`) | Inpatient (Android `haheho.ai` · iOS `ai.haheho.inpatient`) |
 |---|---|---|
-| Android `android/app/google-services.json` | ✅ | ❌ not registered yet |
-| iOS `GoogleService-Info.plist` | ❌ | ❌ |
+| Android `android/app/google-services.json` | ❌ not registered yet | ✅ |
+| iOS `GoogleService-Info.plist` | ❌ | ✅ `ios/App/Inpatient/` |
 
 - **Android:** one `google-services.json` lists all registered apps. After registering a new app in
   Firebase, re-download it and replace the file. An app missing from it still builds, with push off
@@ -197,14 +198,33 @@ Plugin: `@capacitor-firebase/messaging` (what the backend's `haheho-native.js` e
 - **iOS:** one `GoogleService-Info.plist` per app — `ios/App/App/` (Haheho AI) and `ios/App/Inpatient/`
   (inpatient), each added to its own target's resources. Without it the app runs normally and logs
   "Firebase was not configured". Push also needs the APNs key uploaded in Firebase (Project settings →
-  Cloud Messaging) and a signing team set in Xcode (entitlements: `App/App.entitlements`,
+  Cloud Messaging — done: key "Haheho Push Firebase", dev + prod) and a signing team set in Xcode (entitlements: `App/App.entitlements`,
   `Inpatient/Inpatient.entitlements`).
 - Status-bar icon/colour (Android): `res/drawable*/ic_notification`, `res/values/notification.xml`
   (inpatient overrides in `src/inpatient/res`).
+## Release signing (Google Play)
+
+Release builds are signed with the **upload key** `haheho-upload` (one key for all Haheho apps;
+Google holds the real app-signing key via Play App Signing). Gradle reads it from
+`android/keystore.properties`, which is **not in git**:
+
+```
+storeFile=/absolute/path/to/haheho-upload.jks
+storePassword=…
+keyAlias=haheho-upload
+keyPassword=…
+```
+
+The `.jks` file and its password are kept in the team's safe place — ask before creating a new one.
+Without `keystore.properties`, release builds are produced unsigned.
+
+Every upload to Google Play needs a higher `versionCode` (`android/app/build.gradle`), and usually a
+new `versionName`. Store bundle: `npm run release:android:inpatient` →
+`android/app/build/outputs/bundle/inpatientRelease/app-inpatient-release.aab`.
 
 ## Changing the domain later
 
-1. Edit `server.url` in `capacitor.config.ts`
+1. Edit `server.url` in `capacitor.config.ts` (the app opens on `server.appStartPath`, `/auth/login/`)
 2. `npx cap sync`
 3. Rebuild both platforms
 

@@ -6,7 +6,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+        versionCode 2
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
@@ -35,13 +35,34 @@ android {
         inpatient {
             // Hospital inpatients only, separate store listing.
             dimension "app"
-            applicationId "ai.haheho.inpatient"     // PERMANENT once uploaded — confirm before first upload
+            applicationId "haheho.ai"               // = Play Console app "병동 AI 에이전트" (package locked at creation). iOS bundle ID stays ai.haheho.inpatient
             buildConfigField "String", "USER_AGENT_TAG", '"HahehoInpatient"'
+        }
+    }
+
+    // Release signing: Google Play upload key, read from android/keystore.properties
+    // (not in git). Without that file, release builds are simply left unsigned.
+    def keystorePropsFile = rootProject.file('keystore.properties')
+    def keystoreProps = new Properties()
+    if (keystorePropsFile.exists()) {
+        keystorePropsFile.withInputStream { keystoreProps.load(it) }
+    }
+    signingConfigs {
+        if (keystorePropsFile.exists()) {
+            release {
+                storeFile file(keystoreProps['storeFile'])
+                storePassword keystoreProps['storePassword']
+                keyAlias keystoreProps['keyAlias']
+                keyPassword keystoreProps['keyPassword']
+            }
         }
     }
 
     buildTypes {
         release {
+            if (keystorePropsFile.exists()) {
+                signingConfig signingConfigs.release
+            }
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
