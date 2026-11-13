@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A1E5B712FF0A00100C0FFEE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A1E5B702FF0A00100C0FFEE /* GoogleService-Info.plist */; };
 		9A1E5B612FF0A00100C0FFEE /* Splash.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A1E5B602FF0A00100C0FFEE /* Splash.xcassets */; };
 		9A1E5B632FF0A00100C0FFEE /* Splash.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A1E5B622FF0A00100C0FFEE /* Splash.xcassets */; };
 		9A1E5B292FF0A00100C0FFEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A1E5B702FF0A00100C0FFEE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9A1E5B602FF0A00100C0FFEE /* Splash.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Splash.xcassets; sourceTree = "<group>"; };
 		9A1E5B622FF0A00100C0FFEE /* Splash.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Splash.xcassets; sourceTree = "<group>"; };
 		9A1E5B172FF0A00100C0FFEE /* Inpatient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inpatient.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				9A1E5B262FF0A00100C0FFEE /* InfoPlist.strings */,
+				9A1E5B702FF0A00100C0FFEE /* GoogleService-Info.plist */,
 				9A1E5B622FF0A00100C0FFEE /* Splash.xcassets */,
 			);
 			path = Inpatient;
@@ -209,6 +212,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A1E5B712FF0A00100C0FFEE /* GoogleService-Info.plist in Resources */,
 				9A1E5B632FF0A00100C0FFEE /* Splash.xcassets in Resources */,
 				9A1E5B332FF0A00100C0FFEE /* LaunchScreen.storyboard in Resources */,
 				9A1E5B342FF0A00100C0FFEE /* public in Resources */,
@@ -292,6 +296,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Inpatient";
+				CODE_SIGN_ENTITLEMENTS = Inpatient/Inpatient.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				HAHEHO_DISPLAY_NAME = "Inpatient AI Agent";
@@ -316,6 +321,7 @@
 			baseConfigurationReference = 958DCC722DB07C7200EA8C5F /* debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Inpatient";
+				CODE_SIGN_ENTITLEMENTS = Inpatient/Inpatient.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				HAHEHO_DISPLAY_NAME = "Inpatient AI Agent";
@@ -450,6 +456,7 @@
 			baseConfigurationReference = 958DCC722DB07C7200EA8C5F /* debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				HAHEHO_DISPLAY_NAME = "Haheho AI";
@@ -474,6 +481,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				HAHEHO_DISPLAY_NAME = "Haheho AI";

@@ -12,6 +12,10 @@ const config: CapacitorConfig = {
   server: {
     url: 'https://dev.haheho.ai',
     cleartext: false,
+    // Page the app opens on — same as the home-screen web app (manifest start_url).
+    // The login page resumes a saved session / remembered ward itself; starting on
+    // "/" would load patient home first and bounce back here on every launch.
+    appStartPath: '/auth/login/',
     // Shown (from www/) when the site can't be loaded, e.g. no internet.
     errorPath: 'offline.html'
   },
@@ -31,6 +35,10 @@ const config: CapacitorConfig = {
   },
 
   plugins: {
+    // Push (both apps). Show notifications even while the app is open.
+    FirebaseMessaging: {
+      presentationOptions: ['badge', 'sound', 'alert']
+    },
     SplashScreen: {
       launchShowDuration: 1500,
       launchAutoHide: true,

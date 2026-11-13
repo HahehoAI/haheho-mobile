@@ -1,5 +1,8 @@
 package ai.haheho.app;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 import com.getcapacitor.BridgeActivity;
 import com.getcapacitor.CapConfig;
@@ -33,6 +36,23 @@ public class MainActivity extends BridgeActivity {
             config = configWithUserAgentTag(BuildConfig.USER_AGENT_TAG);
         }
         super.onCreate(savedInstanceState);
+        createNotificationChannel();
+    }
+
+    /**
+     * The channel push notifications arrive on (AndroidManifest:
+     * default_notification_channel_id). HIGH importance so they pop up as a
+     * banner — Firebase's built-in fallback channel only shows them in the
+     * notification shade. A channel's importance is fixed once created, so
+     * changing it later needs a new channel ID.
+     */
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return;
+        NotificationChannel channel = new NotificationChannel(
+            getString(R.string.notification_channel_id),
+            getString(R.string.notification_channel_name),
+            NotificationManager.IMPORTANCE_HIGH);
+        getSystemService(NotificationManager.class).createNotificationChannel(channel);
     }
 
     /** The synced capacitor.config.json with `tag` appended to the user agent. */

@@ -3,6 +3,6 @@
 <resources>
     <string name="app_name">Inpatient AI Agent</string>
     <string name="title_activity_main">Inpatient AI Agent</string>
-    <string name="package_name">ai.haheho.inpatient</string>
-    <string name="custom_url_scheme">ai.haheho.inpatient</string>
+    <string name="package_name">haheho.ai</string>
+    <string name="custom_url_scheme">haheho.ai</string>
 </resources>

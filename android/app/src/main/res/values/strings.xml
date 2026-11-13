@@ -4,4 +4,6 @@
     <string name="title_activity_main">Haheho AI</string>
     <string name="package_name">ai.haheho.app</string>
     <string name="custom_url_scheme">ai.haheho.app</string>
+    <string name="notification_channel_id" translatable="false">haheho_notifications</string>
+    <string name="notification_channel_name">Notifications</string>
 </resources>
