@@ -299,7 +299,7 @@
 				CODE_SIGN_ENTITLEMENTS = Inpatient/Inpatient.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q9G23Y7DXH;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				HAHEHO_DISPLAY_NAME = "Inpatient AI Agent";
 				HAHEHO_USER_AGENT_TAG = HahehoInpatient;
 				INFOPLIST_FILE = App/Info.plist;
@@ -325,7 +325,7 @@
 				CODE_SIGN_ENTITLEMENTS = Inpatient/Inpatient.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q9G23Y7DXH;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				HAHEHO_DISPLAY_NAME = "Inpatient AI Agent";
 				HAHEHO_USER_AGENT_TAG = HahehoInpatient;
 				INFOPLIST_FILE = App/Info.plist;
